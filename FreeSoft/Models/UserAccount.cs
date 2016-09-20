@@ -5,7 +5,7 @@ namespace FreeSoft.Models
 {
     public class UserAccount
     {
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         [Required(ErrorMessage = "FirstName name is required.")]
         public string FirstName { get; set; }
@@ -14,7 +14,7 @@ namespace FreeSoft.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email name is required.")]
-        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", ErrorMessage = "Please enter correct email address")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3]\.)|(([\w-]+\.)+))([a-zA-Z{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter valid email.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Username name is required.")]

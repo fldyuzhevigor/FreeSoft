@@ -9,7 +9,10 @@ namespace FreeSoft.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            using (OurDbContext db = new OurDbContext())
+            {
+                return View(db.UserAccounts.ToList());
+            }
         }
 
         public ActionResult Register()
@@ -47,7 +50,7 @@ namespace FreeSoft.Controllers
                 var usr = db.UserAccounts.Single(u => u.Username == userAccount.Username && u.Password == userAccount.Password);
                 if (usr != null)
                 {
-                    Session["UserId"] = usr.UserId.ToString();
+                    Session["UserID"] = usr.UserID.ToString();
                     Session["Username"] = usr.Username.ToString();
                     return RedirectToAction("LoggetIn");
                 }
@@ -61,11 +64,15 @@ namespace FreeSoft.Controllers
 
         public ActionResult LoggetIn()
         {
-            if (Session["UserId"]!= null)
+            if (Session["UserID"]!= null)
             {
-                
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Login");
+            }
+            //return View();
         }
     }
 }
